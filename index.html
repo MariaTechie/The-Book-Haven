@@ -31,32 +31,43 @@
         <img src="media/image8.jpg" alt="Book Image">
         
     </div>
-    
     <header>
-        
         <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="search.html">Search Books</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="search.html">Search Books</a></li>
+            <li><a href="contact.html">Contact</a></li>
+      
+            <!-- User Icon -->
+            <li>
+              <a id="user-login" style="cursor: pointer;">
+                <i class="fa-solid fa-user fa-lg"></i> <!-- User icon -->
+              </a>
+              <a id="user-logout" style="display: none; cursor: pointer;">
+                <i class="fa-solid fa-sign-out-alt fa-lg"></i> <!-- Logout icon -->
+              </a>
+            </li>
+      
+            <li><p id="user-info"></p></li>
+          </ul>
         </nav>
-    </header>
+      </header>
+      
+      
+      
 
 
     <section class="hero">
         <div class="hero-content">
             <h1>Welcome to The Book Haven</h1>
             <p>Discover the world of stories, one book at a time.</p>
-            <a href="#" class="cta-button">Explore Now</a>
+            <a href="search.html" class="cta-button">Explore Now</a>
         </div>
     </section>
     
     <div class="section-divider"></div>
 
-    <button id="google-login">Sign in with Google</button>
-<button id="google-logout" style="display: none;">Sign Out</button>
-<p id="user-info"></p>
+ 
 
    
 

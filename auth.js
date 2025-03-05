@@ -41,13 +41,19 @@ logoutBtn.addEventListener("click", async () => {
 
 // Monitor auth state
 onAuthStateChanged(auth, (user) => {
-  if (user) {
-    userInfo.textContent = `Hello, ${user.displayName}`;
-    loginBtn.style.display = "none";
-    logoutBtn.style.display = "block";
-  } else {
-    userInfo.textContent = "";
-    loginBtn.style.display = "block";
-    logoutBtn.style.display = "none";
-  }
-});
+    const loginIcon = document.getElementById("user-login");
+    const logoutIcon = document.getElementById("user-logout");
+    const userInfo = document.getElementById("user-info");
+  
+    if (user) {
+      userInfo.textContent = `Hello, ${user.displayName}`;
+      loginIcon.style.display = "none";  // Hide login icon
+      logoutIcon.style.display = "inline-block";  // Show logout icon
+    } else {
+      userInfo.textContent = "";
+      loginIcon.style.display = "inline-block";  // Show login icon
+      logoutIcon.style.display = "none";  // Hide logout icon
+    }
+  });
+  
+  
