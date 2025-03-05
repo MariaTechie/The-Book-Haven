@@ -1,0 +1,104 @@
+/* Font settings */
+body {
+    font-family: 'Quicksand', sans-serif !important;
+}
+
+/* Container holding the form */
+.container {
+    max-width: 500px !important; /* Limit the form width */
+    margin: 50px auto !important; /* Center the form horizontally */
+    padding: 30px !important;
+    background-color: #fff !important; /* White background for form */
+    border-radius: 10px !important; /* Rounded corners for the form */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1) !important; /* Subtle shadow around the form */
+    border: 1px solid #e0e0e0 !important; /* Light border */
+}
+
+/* Form Header */
+h2 {
+    text-align: center !important;
+    font-size: 28px !important;
+    font-weight: 600 !important;
+    color: #7a5c48 !important;
+    margin-bottom: 20px !important;
+    font-family: 'Raleway', sans-serif !important; /* Raleway font for header */
+}
+
+p {
+    text-align: center !important;
+    color: #888 !important;
+    margin-bottom: 30px !important;
+}
+
+/* Input and Textarea Styling */
+input, textarea {
+    width: 100% !important;
+    padding: 12px 15px !important;
+    font-size: 16px !important;
+    border: 1px solid #ccc !important;
+    border-radius: 8px !important; /* Rounded corners */
+    margin-bottom: 15px !important; /* Space between input fields */
+    background-color: #fafafa !important; /* Subtle background color */
+    transition: all 0.3s ease-in-out !important; /* Smooth transition for hover and focus effects */
+    font-family: 'Quicksand', sans-serif !important; /* Quicksand font for form inputs */
+}
+
+input:focus, textarea:focus {
+    border-color: #7a5c48 !important;
+    box-shadow: 0 0 8px rgba(122, 92, 72, 0.4) !important; /* Subtle glow */
+    outline: none !important;
+    background-color: #fff !important; /* White background on focus */
+}
+
+/* Button Styling */
+button[type="submit"] {
+    background-color: #7a5c48 !important;
+    color: white !important;
+    border: none !important;
+    padding: 15px 20px !important;
+    font-size: 18px !important;
+    font-weight: 500 !important;
+    border-radius: 8px !important;
+    cursor: pointer !important;
+    width: 100% !important; /* Full width */
+    transition: background-color 0.3s ease, transform 0.3s ease !important; /* Smooth transition for hover effect */
+    margin-top: 10px !important;
+}
+
+button[type="submit"]:hover {
+    background-color: #5b3c2b !important; /* Darker shade on hover */
+    transform: translateY(-2px) !important; /* Slight lift effect on hover */
+}
+
+button[type="submit"]:active {
+    background-color: #4a2f1b !important; /* Even darker shade on click */
+    transform: translateY(2px) !important; /* Slight press effect on active */
+}
+
+/* Success and Error Messages Styling */
+#success-message, #error-message {
+    font-size: 16px !important;
+    text-align: center !important;
+    margin-top: 15px !important;
+}
+
+/* Success message */
+#success-message {
+    color: #27ae60 !important; /* Green color for success */
+}
+
+/* Error message */
+#error-message {
+    color: #e74c3c !important; /* Red color for error */
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .container {
+        padding: 20px !important;
+    }
+
+    h2 {
+        font-size: 24px !important;
+    }
+}

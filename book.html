@@ -41,8 +41,9 @@
     </header>
 
     <main id="book-details">
-        <p>Loading book details...</p>
+        <div class="loader"></div>
     </main>
+    
     <footer>
         <div class="footer-container">
             <!-- Social Media Links -->
@@ -64,87 +65,99 @@
         </div>
     </footer>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const params = new URLSearchParams(window.location.search);
-            let bookId = params.get("id");
-            const bookDetailsDiv = document.getElementById("book-details");
+       document.addEventListener("DOMContentLoaded", function() {
+    const params = new URLSearchParams(window.location.search);
+    let bookId = params.get("id");
+    const bookDetailsDiv = document.getElementById("book-details");
+    const loader = document.querySelector('.loader'); // Get the loader element
 
-            if (!bookId) {
-                bookDetailsDiv.innerHTML = "<p>Error: Book ID is missing.</p>";
-                console.error("No book ID found in URL");
-                return;
-            }
+    if (!bookId) {
+        bookDetailsDiv.innerHTML = "<p>Error: Book ID is missing.</p>";
+        console.error("No book ID found in URL");
+        return;
+    }
 
-            console.log("Fetching details for book ID:", bookId);
+    // Show the loader when starting to fetch data
+    loader.style.display = 'block';
 
-            if (bookId.startsWith("OL-")) {
-                // Open Library Book
-                const cleanId = bookId.replace("OL-", "").replace("/works/", "");
-                fetch(`https://openlibrary.org/works/${cleanId}.json`)
-                    .then(response => {
-                        if (!response.ok) throw new Error("Open Library book not found");
-                        return response.json();
-                    })
-                    .then(book => {
-                        console.log("Open Library response:", book);
-                        const title = book.title || 'Untitled';
-                        const author = book.authors ? book.authors.map(a => a.name).join(', ') : 'Unknown';
-                        const description = book.description?.value || book.description || 'No description available';
-                        const imageUrl = book.covers ? `https://covers.openlibrary.org/b/id/${book.covers[0]}-M.jpg` : 'placeholder.jpg';
+    console.log("Fetching details for book ID:", bookId);
 
-                        bookDetailsDiv.innerHTML = `
-                            <div class="book-card">
-                                <img src="${imageUrl}" alt="${title}" />
-                                <h2>${title}</h2>
-                                <h3>by ${author}</h3>
-                                <p>${description}</p>
-                            </div>
-                        `;
-                    })
-                    .catch(error => {
-                        console.error("Error fetching Open Library details:", error);
-                        bookDetailsDiv.innerHTML = "<p>Unable to load book details. Open Library request failed.</p>";
-                    });
+    if (bookId.startsWith("OL-")) {
+        // Open Library Book
+        const cleanId = bookId.replace("OL-", "").replace("/works/", "");
+        fetch(`https://openlibrary.org/works/${cleanId}.json`)
+            .then(response => {
+                if (!response.ok) throw new Error("Open Library book not found");
+                return response.json();
+            })
+            .then(book => {
+                console.log("Open Library response:", book);
+                const title = book.title || 'Untitled';
+                const author = book.authors ? book.authors.map(a => a.name).join(', ') : 'Unknown';
+                const description = book.description?.value || book.description || 'No description available';
+                const imageUrl = book.covers ? `https://covers.openlibrary.org/b/id/${book.covers[0]}-M.jpg` : 'placeholder.jpg';
 
-            } else {
-                // Google Books Book
-                fetch(`https://www.googleapis.com/books/v1/volumes/${bookId}`)
-                    .then(response => {
-                        if (!response.ok) throw new Error("Google Book not found");
-                        return response.json();
-                    })
-                    .then(book => {
-                        console.log("Google Books response:", book);
-                        const title = book.volumeInfo?.title || 'Untitled';
-                        const author = book.volumeInfo?.authors?.join(', ') || 'Unknown';
-                        const description = book.volumeInfo?.description || 'No description available';
-                        const imageUrl = book.volumeInfo?.imageLinks?.thumbnail || 'placeholder.jpg';
-                        const publishedDate = book.volumeInfo?.publishedDate || 'Unknown';
-                        const pageCount = book.volumeInfo?.pageCount ? `${book.volumeInfo.pageCount} pages` : 'Page count unknown';
-                        const publisher = book.volumeInfo?.publisher || 'Unknown publisher';
-                        const categories = book.volumeInfo?.categories ? book.volumeInfo.categories.join(', ') : 'No categories';
-                        const isbn = book.volumeInfo?.industryIdentifiers?.map(id => `${id.type}: ${id.identifier}`).join('<br>') || 'No ISBN available';
+                bookDetailsDiv.innerHTML = `
+                    <div class="book-card">
+                        <img src="${imageUrl}" alt="${title}" />
+                        <h2>${title}</h2>
+                        <h3>by ${author}</h3>
+                        <p>${description}</p>
+                    </div>
+                `;
 
-                        bookDetailsDiv.innerHTML = `
-                            <div class="book-card">
-                                <img src="${imageUrl}" alt="${title}" />
-                                <h2>${title}</h2>
-                                <h3>by ${author}</h3>
-                                <p><strong>Published:</strong> ${publishedDate}</p>
-                                <p><strong>Pages:</strong> ${pageCount}</p>
-                                <p><strong>Publisher:</strong> ${publisher}</p>
-                                <p><strong>Categories:</strong> ${categories}</p>
-                                <p><strong>ISBN:</strong><br>${isbn}</p>
-                                <p>${description}</p>
-                            </div>
-                        `;
-                    })
-                    .catch(error => {
-                        console.error("Error fetching Google Books details:", error);
-                        bookDetailsDiv.innerHTML = "<p>Unable to load book details. Google Books request failed.</p>";
-                    });
-            }
-        });
+                // Hide the loader after content has been loaded
+                loader.style.display = 'none';
+            })
+            .catch(error => {
+                console.error("Error fetching Open Library details:", error);
+                bookDetailsDiv.innerHTML = "<p>Unable to load book details. Open Library request failed.</p>";
+                loader.style.display = 'none'; // Hide the loader in case of an error
+            });
+
+    } else {
+        // Google Books Book
+        fetch(`https://www.googleapis.com/books/v1/volumes/${bookId}`)
+            .then(response => {
+                if (!response.ok) throw new Error("Google Book not found");
+                return response.json();
+            })
+            .then(book => {
+                console.log("Google Books response:", book);
+                const title = book.volumeInfo?.title || 'Untitled';
+                const author = book.volumeInfo?.authors?.join(', ') || 'Unknown';
+                const description = book.volumeInfo?.description || 'No description available';
+                const imageUrl = book.volumeInfo?.imageLinks?.thumbnail || 'placeholder.jpg';
+                const publishedDate = book.volumeInfo?.publishedDate || 'Unknown';
+                const pageCount = book.volumeInfo?.pageCount ? `${book.volumeInfo.pageCount} pages` : 'Page count unknown';
+                const publisher = book.volumeInfo?.publisher || 'Unknown publisher';
+                const categories = book.volumeInfo?.categories ? book.volumeInfo.categories.join(', ') : 'No categories';
+                const isbn = book.volumeInfo?.industryIdentifiers?.map(id => `${id.type}: ${id.identifier}`).join('<br>') || 'No ISBN available';
+
+                bookDetailsDiv.innerHTML = `
+                    <div class="book-card">
+                        <img src="${imageUrl}" alt="${title}" />
+                        <h2>${title}</h2>
+                        <h3>by ${author}</h3>
+                        <p><strong>Published:</strong> ${publishedDate}</p>
+                        <p><strong>Pages:</strong> ${pageCount}</p>
+                        <p><strong>Publisher:</strong> ${publisher}</p>
+                        <p><strong>Categories:</strong> ${categories}</p>
+                        <p><strong>ISBN:</strong><br>${isbn}</p>
+                        <p>${description}</p>
+                    </div>
+                `;
+
+                loader.style.display = 'none'; // Hide the loader after content has been loaded
+            })
+            .catch(error => {
+                console.error("Error fetching Google Books details:", error);
+                bookDetailsDiv.innerHTML = "<p>Unable to load book details. Google Books request failed.</p>";
+                loader.style.display = 'none'; // Hide the loader in case of an error
+            });
+    }
+});
+
     </script>
 </body>
 </html>
