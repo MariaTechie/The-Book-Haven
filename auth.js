@@ -1,8 +1,8 @@
 import { auth, provider, signInWithPopup, signOut } from "./firebase.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-const loginBtn = document.getElementById("google-login");
-const logoutBtn = document.getElementById("google-logout");
+const loginBtn = document.getElementById("user-login");
+const logoutBtn = document.getElementById("user-logout");
 const userInfo = document.getElementById("user-info");
 
 // Handle login
