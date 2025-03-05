@@ -1,10 +1,8 @@
-import { auth, db, collection, addDoc, doc, setDoc } from "./firebase.js";
+import { auth, db, doc, setDoc, getDoc } from "./firebase.js";
 
-document.addEventListener("DOMContentLoaded", function() {
-    const addToFavoritesBtn = document.getElementById("add-to-favorites");
-
-    if (addToFavoritesBtn) {
-        addToFavoritesBtn.addEventListener("click", async () => {
+document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("click", async function (event) {
+        if (event.target && event.target.id === "add-to-favorites") {
             const user = auth.currentUser;
             if (!user) {
                 alert("Please sign in to save favorites!");
@@ -18,16 +16,21 @@ document.addEventListener("DOMContentLoaded", function() {
 
             try {
                 const userFavoritesRef = doc(db, "users", user.uid);
-                await setDoc(userFavoritesRef, {
-                    favorites: {
-                        [bookId]: { title, author, imageUrl }
-                    }
-                }, { merge: true });
+                const docSnap = await getDoc(userFavoritesRef);
+
+                let favorites = {};
+                if (docSnap.exists()) {
+                    favorites = docSnap.data().favorites || {};
+                }
+
+                favorites[bookId] = { title, author, imageUrl };
+
+                await setDoc(userFavoritesRef, { favorites }, { merge: true });
 
                 alert("Book added to favorites!");
             } catch (error) {
                 console.error("Error adding favorite:", error);
             }
-        });
-    }
+        }
+    });
 });
