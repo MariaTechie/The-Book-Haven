@@ -57,6 +57,17 @@
     animation: spin 1s linear infinite;
     margin: 20px auto;
 }
+.favorite-btn {
+    display: block !important; /* Ensure it’s visible */
+    padding: 10px 15px;
+    font-size: 16px;
+    background-color: red;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
 
 @keyframes spin {
     0% { transform: rotate(0deg); }

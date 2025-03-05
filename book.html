@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head><link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -133,6 +134,7 @@
                 const publisher = book.volumeInfo?.publisher || 'Unknown publisher';
                 const categories = book.volumeInfo?.categories ? book.volumeInfo.categories.join(', ') : 'No categories';
                 const isbn = book.volumeInfo?.industryIdentifiers?.map(id => `${id.type}: ${id.identifier}`).join('<br>') || 'No ISBN available';
+                console.log("Book details:", bookDetailsDiv.innerHTML);
 
                 bookDetailsDiv.innerHTML = `
                     <div class="book-card">
