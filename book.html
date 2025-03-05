@@ -137,22 +137,24 @@
                 console.log("Book details:", bookDetailsDiv.innerHTML);
 
                 bookDetailsDiv.innerHTML = `
-                    <div class="book-card">
-                        <img src="${imageUrl}" alt="${title}" />
-                        <h2>${title}</h2>
-                        <h3>by ${author}</h3>
-                        <p><strong>Published:</strong> ${publishedDate}</p>
-                        <p><strong>Pages:</strong> ${pageCount}</p>
-                        <p><strong>Publisher:</strong> ${publisher}</p>
-                        <p><strong>Categories:</strong> ${categories}</p>
-                        <p><strong>ISBN:</strong><br>${isbn}</p>
-                    
-    <button id="add-to-favorites" class="favorite-btn">❤️ Add to Favorites</button>
+    <div class="book-card">
+        <img src="${imageUrl}" alt="${title}" />
+        <h2>${title}</h2>
+        <h3>by ${author}</h3>
+        <p><strong>Published:</strong> ${publishedDate}</p>
+        <p><strong>Pages:</strong> ${pageCount}</p>
+        <p><strong>Publisher:</strong> ${publisher}</p>
+        <p><strong>Categories:</strong> ${categories}</p>
+        <p><strong>ISBN:</strong><br>${isbn}</p>
+        
+        <!-- favorite button -->
+        <button id="add-to-favorites" class="favorite-btn">
+            <i class="fa fa-heart"></i> Add to Favorites
+        </button>
 
-
-                        <p>${description}</p>
-                    </div>
-                `;
+        <p>${description}</p>
+    </div>
+`;
 
                 loader.style.display = 'none'; // Hide the loader after content has been loaded
             })

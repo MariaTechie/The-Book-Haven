@@ -58,14 +58,18 @@
     margin: 20px auto;
 }
 .favorite-btn {
-    display: block !important; /* Ensure it’s visible */
-    padding: 10px 15px;
-    font-size: 16px;
-    background-color: red;
+    display: block; /* Ensure it is visible */
+    background-color: #ff4d4d;
     color: white;
+    font-size: 16px;
+    padding: 10px;
     border: none;
     cursor: pointer;
     margin-top: 10px;
+}
+
+.favorite-btn i {
+    margin-right: 5px;
 }
 
 
