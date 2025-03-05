@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Me</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Book Haven</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="contact.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+        import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
+         src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+         src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+
+        //  Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDJqayT-PO6ss8LdE4pqiDRdOQYCCDOHT0",
+            authDomain: "the-book-haven-6a20b.firebaseapp.com",
+            databaseURL: "https://the-book-haven-6a20b-default-rtdb.firebaseio.com",
+            projectId: "the-book-haven-6a20b",
+            storageBucket: "the-book-haven-6a20b.firebasestorage.app",
+            messagingSenderId: "847086382104",
+            appId: "1:847086382104:web:ae35ad074cc8ea2e6a676d",
+            measurementId: "G-J2VMMHJRYB"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
+        // Handle Form Submission
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("contact-form").addEventListener("submit", function (e) {
+                e.preventDefault(); // Prevent form from refreshing the page
+
+                const name = document.getElementById("name").value;
+                const email = document.getElementById("email").value;
+                const message = document.getElementById("message").value;
+
+                // Add the message to Firebase Realtime Database
+                const messagesRef = ref(database, 'messages/' + new Date().getTime());
+                set(messagesRef, {
+                    name: name,
+                    email: email,
+                    message: message,
+                    timestamp: new Date().toISOString()
+                })
+                .then(() => {
+                    // Show success message
+                    document.getElementById("success-message").innerText = "Your message has been sent successfully!";
+                    document.getElementById("contact-form").reset(); // Reset form fields
+                    document.getElementById("error-message").innerText = ""; // Clear error message
+                })
+                .catch(error => {
+                    // Show error message
+                    document.getElementById("error-message").innerText = "Error occurred, please try again later.";
+                    document.getElementById("success-message").innerText = ""; // Clear success message
+                    console.error("Error:", error);
+                });
+            });
+        });
+    </script>
+
+    <style>
+        /* Change border color to #7a5c48 when input fields are focused */
+     /* Change the border and background color to #7a5c48 when input fields are focused */
+
+
+    </style>
+
+</head>
+<body>
+    <div class="photo-collage">
+        <img src="media/image1.jpg" alt="Book Image">
+        <img src="media/image2.jpg" alt="Book Image">
+        <img src="media/image3.jpg" alt="Book Image">
+        <img src="media/image4.jpg" alt="Book Image">
+        <img src="media/image5.jpg" alt="Book Image">
+        <img src="media/image6.jpg" alt="Book Image">
+        <img src="media/image7.jpg" alt="Book Image">
+        <img src="media/image8.jpg" alt="Book Image">
+        
+    </div>
+    
+    <header>
+        
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="search.html">Search Books</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container mt-5">
+        <h2 class="text-center">Contact Me</h2>
+        <p class="text-center">Have a question? Leave me a message!</p>
+
+        <form id="contact-form">
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" required>
+            </div>
+            <div class="mb-3">
+                <label for="message" class="form-label">Message</label>
+                <textarea class="form-control" id="message" rows="4" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Send Message</button>
+        </form>
+
+        <!-- Success and error messages -->
+        <p id="success-message" class="text-success mt-3"></p>
+        <p id="error-message" class="text-danger mt-3"></p>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <!-- Social Media Links -->
+            <div class="social-icons">
+                <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+            </div>
+    
+            <!-- Quick Links -->
+            <ul class="footer-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="search.html">Search Books</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+    
+            <!-- Copyright -->
+            <p>&copy; 2025 The Book Haven. All Rights Reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

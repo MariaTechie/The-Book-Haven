@@ -22,7 +22,7 @@ body {
 }
 
 header {
-    background-color: #7a5c48; /* Brown color */
+    background-color: #7a5c48; 
     color: white;
     text-align: center;
     padding: 1px 0;
@@ -216,7 +216,7 @@ button:hover {
     height: 150px; /* Set smaller height */
     top: 50%; /* Center vertically */
     transform: translateY(-50%);
-    background-color: rgba(122, 92, 72, 0.8); /* Adjust color if needed */
+    background-color: rgba(122, 92, 72, 0.8); 
   margin-top: 200px;
 }
 

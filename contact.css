@@ -1,3 +1,22 @@
+/* Define CSS Variables */
+:root {
+    --form-max-width: 500px; /* Limit the form width */
+    --form-padding: 30px; /* Padding for the form */
+    --form-background-color: #fff; /* White background for form */
+    --form-border-radius: 10px; /* Rounded corners for the form */
+    --form-box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow around the form */
+    --form-border-color: #e0e0e0; /* Light border */
+    --header-font-color: #7a5c48; /* Header font color */
+    --input-background-color: #fafafa; /* Subtle background color for inputs */
+    --input-focus-border-color: #7a5c48; /* Border color on focus */
+    --input-focus-box-shadow: 0 0 8px rgba(122, 92, 72, 0.4); /* Subtle glow on focus */
+    --button-background-color: #7a5c48; /* Button background color */
+    --button-hover-background-color: #5b3c2b; /* Button background color on hover */
+    --button-active-background-color: #4a2f1b; /* Button background color on active */
+    --success-message-color: #27ae60; /* Green color for success message */
+    --error-message-color: #e74c3c; /* Red color for error message */
+}
+
 /* Font settings */
 body {
     font-family: 'Quicksand', sans-serif !important;
@@ -5,13 +24,13 @@ body {
 
 /* Container holding the form */
 .container {
-    max-width: 500px !important; /* Limit the form width */
+    max-width: var(--form-max-width) !important; /* Limit the form width */
     margin: 50px auto !important; /* Center the form horizontally */
-    padding: 30px !important;
-    background-color: #fff !important; /* White background for form */
-    border-radius: 10px !important; /* Rounded corners for the form */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1) !important; /* Subtle shadow around the form */
-    border: 1px solid #e0e0e0 !important; /* Light border */
+    padding: var(--form-padding) !important; /* Padding for the form */
+    background-color: var(--form-background-color) !important; /* White background for form */
+    border-radius: var(--form-border-radius) !important; /* Rounded corners for the form */
+    box-shadow: var(--form-box-shadow) !important; /* Subtle shadow around the form */
+    border: 1px solid var(--form-border-color) !important; /* Light border */
 }
 
 /* Form Header */
@@ -19,7 +38,7 @@ h2 {
     text-align: center !important;
     font-size: 28px !important;
     font-weight: 600 !important;
-    color: #7a5c48 !important;
+    color: var(--header-font-color) !important; /* Header font color */
     margin-bottom: 20px !important;
     font-family: 'Raleway', sans-serif !important; /* Raleway font for header */
 }
@@ -38,21 +57,21 @@ input, textarea {
     border: 1px solid #ccc !important;
     border-radius: 8px !important; /* Rounded corners */
     margin-bottom: 15px !important; /* Space between input fields */
-    background-color: #fafafa !important; /* Subtle background color */
+    background-color: var(--input-background-color) !important; /* Subtle background color */
     transition: all 0.3s ease-in-out !important; /* Smooth transition for hover and focus effects */
     font-family: 'Quicksand', sans-serif !important; /* Quicksand font for form inputs */
 }
 
 input:focus, textarea:focus {
-    border-color: #7a5c48 !important;
-    box-shadow: 0 0 8px rgba(122, 92, 72, 0.4) !important; /* Subtle glow */
+    border-color: var(--input-focus-border-color) !important; /* Border color on focus */
+    box-shadow: var(--input-focus-box-shadow) !important; /* Subtle glow */
     outline: none !important;
-    background-color: #fff !important; /* White background on focus */
+    background-color: var(--form-background-color) !important; /* White background on focus */
 }
 
 /* Button Styling */
 button[type="submit"] {
-    background-color: #7a5c48 !important;
+    background-color: var(--button-background-color) !important; /* Button background color */
     color: white !important;
     border: none !important;
     padding: 15px 20px !important;
@@ -66,12 +85,12 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-    background-color: #5b3c2b !important; /* Darker shade on hover */
+    background-color: var(--button-hover-background-color) !important; /* Darker shade on hover */
     transform: translateY(-2px) !important; /* Slight lift effect on hover */
 }
 
 button[type="submit"]:active {
-    background-color: #4a2f1b !important; /* Even darker shade on click */
+    background-color: var(--button-active-background-color) !important; /* Even darker shade on click */
     transform: translateY(2px) !important; /* Slight press effect on active */
 }
 
@@ -84,12 +103,12 @@ button[type="submit"]:active {
 
 /* Success message */
 #success-message {
-    color: #27ae60 !important; /* Green color for success */
+    color: var(--success-message-color) !important; /* Green color for success */
 }
 
 /* Error message */
 #error-message {
-    color: #e74c3c !important; /* Red color for error */
+    color: var(--error-message-color) !important; /* Red color for error */
 }
 
 /* Responsive Design */
