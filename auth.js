@@ -8,19 +8,35 @@ const userInfo = document.getElementById("user-info");
 // Handle login
 loginBtn.addEventListener("click", () => {
   console.log("Login button clicked");
+  
+  // Disable button to prevent multiple clicks
+  loginBtn.disabled = true;
+
+  // Create a new window with about:blank to prevent popup blocking
+  const loginWindow = window.open("", "_blank");
+
   signInWithPopup(auth, provider)
     .then((result) => {
-      const user = result.user;
-      console.log("User signed in:", user);
+      loginWindow.location.href = "https://mariatechie.github.io/The-Book-Haven/"; // 🔹 Replace with your actual website URL
+      console.log("User signed in:", result.user);
     })
-    .catch((error) => console.error("Error signing in:", error));
+    .catch((error) => {
+      loginWindow.close(); // Close the blank window if there's an error
+      console.error("Error signing in:", error);
+    })
+    .finally(() => {
+      loginBtn.disabled = false; // Re-enable the button
+    });
 });
 
 // Handle logout
-logoutBtn.addEventListener("click", () => {
-  signOut(auth)
-    .then(() => console.log("User signed out"))
-    .catch((error) => console.error("Error signing out:", error));
+logoutBtn.addEventListener("click", async () => {
+  try {
+    await signOut(auth);
+    console.log("User signed out");
+  } catch (error) {
+    console.error("Error signing out:", error);
+  }
 });
 
 // Monitor auth state
